@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 70%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .todo {
+      flex: 1;
+      padding: 8px;
+      background-color: #f2f2f2;
+      border-radius: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .todo.completed {
+      text-decoration: line-through;
+      background-color: #ddd;
+    }
+    .actions {
+      margin-left: 10px;
+    }
+    .actions button {
+      background-color: #f44336;
+    }
+    .actions button.update {
+      background-color: #ff9800;
+    }
+  </style>
+</head>
+<body>
+  <h1>Todo App</h1>
+  <form action="/add" method="POST">
+    <input type="text" name="todo" placeholder="Add a new todo">
+    <button type="submit">Add</button>
+  </form>
+  <ul>
+    <% todos.forEach((todo, index) => { %>
+      <li>
+        <div class="todo <%= todo.completed ? 'completed' : '' %>">
+          <%= todo.text %>
+        </div>
+        <div class="actions">
+          <button onclick="location.href='/update/<%= index %>'" class="update">Update</button>
+          <button onclick="location.href='/delete/<%= index %>'">Delete</button>
+          <% if (!todo.completed) { %>
+            <button onclick="location.href='/complete/<%= index %>'">Mark as Completed</button>
+          <% } %>
+        </div>
+      </li>
+    <% }); %>
+  </ul>
+</body>
+</html>
