@@ -1,11 +1,17 @@
-FROM node:18
+FROM node:20 AS zipped
 
 
 WORKDIR /app
 
 COPY . .
 
-RUN npm i 
+RUN npm i
+
+FROM node:20-slim
+
+WORKDIR /app
+
+COPY --from=zipped /app .
 
 EXPOSE 3000
 
