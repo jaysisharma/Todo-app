@@ -1,0 +1,14 @@
+//  Pipeline code for my New repo of index.html file and hosted it on apache2 server with git polling 
+// so if any changes reflefts then it automaticaaly update the server
+
+    pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo "Hello"
+            }
+        }
+    }
+}
